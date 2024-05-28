@@ -5,6 +5,9 @@ import com.web3.ecommerceback.repository.AppointementRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 public class AppointementService {
@@ -23,6 +26,44 @@ public class AppointementService {
         }catch (Exception e){
             e.printStackTrace();
             return "failed to appointment";
+        }
+    }
+
+    public String validateAppointment(long id) {
+        try {
+            Optional<Appointment> appointment = repository.findById(id);
+            if (appointment.isPresent() &&
+                    appointment.get()
+                            .getAppointmentDate()
+                            .toLocalDate().isAfter(LocalDate.now())) {
+                repository.updateStatus("validated",id);
+                return "appointment validated";
+            }
+
+            return "failed to validate appointment";
+        }catch (Exception e){
+            e.printStackTrace();
+            return "failed to validate appointment";
+        }
+    }
+
+    public String rejectAppointment(long id) {
+        try {
+            repository.updateStatus("rejected",id);
+            return "appointment rejected";
+        }catch (Exception e){
+            e.printStackTrace();
+            return "failed to reject appointment";
+        }
+    }
+
+    public String archiveAppointment(long id) {
+        try {
+            repository.updateStatus("archived",id);
+            return "appointment archived";
+        }catch (Exception e){
+            e.printStackTrace();
+            return "failed to archive appointment";
         }
     }
 }

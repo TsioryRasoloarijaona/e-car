@@ -13,7 +13,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/rdv")
 @AllArgsConstructor
-public class AppointementController {
+public class AppointmentController {
     private AppointementService service;
     private AppointementRepository repository;
 
@@ -52,6 +52,20 @@ public class AppointementController {
         return repository.findAppointementsByStatus(status);
     }
 
+    @PutMapping("/validate/{id}")
+    public String validateAppointment(@PathVariable long id) {
+        return service.validateAppointment(id);
+    }
+
+    @PutMapping("/reject/{id}")
+    public String rejectAppointment(@PathVariable long id) {
+        return service.rejectAppointment(id);
+    }
+
+    @PutMapping("/archive/{id}")
+    public String archiveAppointment(@PathVariable long id) {
+        return service.archiveAppointment(id);
+    }
 
 
 
