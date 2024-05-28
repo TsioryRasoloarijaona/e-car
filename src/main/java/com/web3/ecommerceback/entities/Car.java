@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -44,5 +47,11 @@ public class Car implements Serializable {
     @Column(nullable = false , columnDefinition = "boolean default false")
     private boolean status; //pinned or not
 
+    @Column(nullable = false)
+    private double price;
+
     private String type;
+
+    @ElementCollection
+    private List<String> images;
 }
