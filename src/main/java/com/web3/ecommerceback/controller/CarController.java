@@ -26,6 +26,11 @@ public class CarController {
         return service.findAll();
     }
 
+    @GetMapping("/byId/{id}")
+    public Optional<Car> findById(@PathVariable Long id) {
+        return repository.findById(id);
+    }
+
     @GetMapping("/byBrand/{brand}")
     public Optional<Car> byBrand(@PathVariable String brand) {
         return repository.findCarsByBrandContainsIgnoreCase(brand);
