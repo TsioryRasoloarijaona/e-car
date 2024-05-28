@@ -13,7 +13,7 @@ public class MailSender {
     public boolean sendMail (String to , String subject , String text){
         try {
             SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom(System.getProperty("GMAIL_USERNAME"));
+            message.setFrom(System.getenv("GMAIL_USERNAME"));
             message.setTo(to);
             message.setSubject(subject);
             message.setText(text);

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/car")
@@ -26,13 +27,13 @@ public class CarController {
     }
 
     @GetMapping("/byBrand/{brand}")
-    public List<Car> byBrand(@PathVariable String brand) {
-        return repository.findCarsByBrand(brand);
+    public Optional<Car> byBrand(@PathVariable String brand) {
+        return repository.findCarsByBrandContainsIgnoreCase(brand);
     }
 
     @GetMapping("/byModel/{model}")
-    public List<Car> findCarsByModel(@PathVariable String model){
-        return repository.findCarsByModel(model);
+    public Optional<Car> findCarsByModel(@PathVariable String model){
+        return repository.findCarsByModelContainsIgnoreCase(model);
     }
 
     @GetMapping("/byPrice")
@@ -41,8 +42,8 @@ public class CarController {
     };
 
     @GetMapping("/byMotor/{motorType}")
-    public List<Car> findCarsByMotorTypeEquals(String motorType){
-        return repository.findCarsByMotorTypeEquals(motorType);
+    public Optional<Car> findCarsByMotorTypeEquals(String motorType){
+        return repository.findCarsByMotorTypeContainsIgnoreCase(motorType);
     };
 
     @GetMapping("/pined")
@@ -77,8 +78,10 @@ public class CarController {
 
     @PutMapping("/pin")
     public String updatePirce (@RequestParam double price , @RequestParam long id){
-        return service.pin(id);
+        return service.updatePrice(price,id);
     }
+
+
 
 
 }

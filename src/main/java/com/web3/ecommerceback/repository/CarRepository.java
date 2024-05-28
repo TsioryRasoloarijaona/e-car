@@ -9,17 +9,18 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CarRepository extends JpaRepository<Car,Long> {
 
-    List<Car> findCarsByBrand(String brand);
+    Optional<Car> findCarsByBrandContainsIgnoreCase(String brand);
 
-    List<Car> findCarsByModel( String model);
+    Optional<Car> findCarsByModelContainsIgnoreCase( String model);
 
     List<Car> findCarsByPriceBetween(double min , double max);
 
-    List<Car> findCarsByMotorTypeEquals(String motorType);
+    Optional<Car> findCarsByMotorTypeContainsIgnoreCase(String motorType);
 
     List<Car> findCarsByStatusEquals(boolean status);
 

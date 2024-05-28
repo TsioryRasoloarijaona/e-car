@@ -1,6 +1,6 @@
 package com.web3.ecommerceback.service;
 
-import com.web3.ecommerceback.entities.Appointement;
+import com.web3.ecommerceback.entities.Appointment;
 import com.web3.ecommerceback.repository.AppointementRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ public class AppointementService {
     private AppointementRepository repository;
     private MailSender mailSender;
 
-    public String appointement(Appointement appointement) {
+    public String appointement(Appointment appointement) {
         try{
             String subject = "Appointment request - "+appointement.getAppointmentDate()+" "+appointement.getEmail();
             String body = appointement.getMessage();

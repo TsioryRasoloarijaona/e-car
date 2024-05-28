@@ -1,11 +1,9 @@
 package com.web3.ecommerceback.entities;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Date;
-import java.time.Instant;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,7 +12,7 @@ import java.time.Instant;
 @EqualsAndHashCode
 @Entity
 @Table(name = "Appointement")
-public class Appointement {
+public class Appointment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -27,6 +25,9 @@ public class Appointement {
     @Column(name = "first_name")
     private String firstName;
 
+    @Column(name = "last_name")
+    private String lastName;
+
     @Column(nullable = false)
     private String email;
 
@@ -34,10 +35,10 @@ public class Appointement {
     private String message;
 
     @Column(nullable = false)
-    private String Contact;
+    private String contact;
 
-    @Column(nullable = false)
-    private Date AppointmentDate;
+    @Column(nullable = false,name = "appointment_date")
+    private Date appointmentDate;
 
     @Column(columnDefinition = "VARCHAR(20) DEFAULT 'pending' CHECK (status IN ('pending', 'validated', 'rejected', 'archived'))")
     private String status;
