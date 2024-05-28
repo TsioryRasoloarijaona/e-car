@@ -70,7 +70,15 @@ public class CarController {
         return service.priceInterval();
     }
 
+    @PutMapping("/pin/{id}")
+    public String pin (@PathVariable long id){
+        return service.pin(id);
+    }
 
+    @PutMapping("/pin")
+    public String updatePirce (@RequestParam double price , @RequestParam long id){
+        return service.pin(id);
+    }
 
 
 }

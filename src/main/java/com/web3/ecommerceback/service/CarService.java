@@ -49,4 +49,26 @@ public class CarService {
 
         return List.of(min , max);
     }
+
+    public String pin(long id){
+        try {
+            repository.updateCarById(id);
+            return "updated successfully";
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return "failed to update";
+        }
+    }
+
+    public String updatePrice(double price ,long id){
+        try {
+            repository.updateCarPriceById(price,id);
+            return "updated successfully";
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return "failed to update";
+        }
+    }
 }

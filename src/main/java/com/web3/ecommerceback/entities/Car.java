@@ -44,7 +44,7 @@ public class Car implements Serializable {
     @Column(name = "place_number" , nullable = false)
     private int placeNumber;
 
-    @Column(nullable = false , columnDefinition = "boolean default false")
+    @Column(nullable = false , columnDefinition = "boolean default false", updatable = true)
     private boolean status; //pinned or not
 
     @Column(nullable = false)
