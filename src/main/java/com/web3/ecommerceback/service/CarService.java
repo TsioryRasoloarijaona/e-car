@@ -4,8 +4,15 @@ import com.web3.ecommerceback.entities.Car;
 import com.web3.ecommerceback.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static java.lang.System.in;
 
 @Service
 public class CarService {
@@ -70,5 +77,41 @@ public class CarService {
             e.printStackTrace();
             return "failed to update";
         }
+
+    }
+
+
+    public List<Car> research(String input){
+        List<String> keyWord = new ArrayList<>(Arrays.asList(input.split("\\s+")));
+        List<Car> result = new ArrayList<>();
+        for (String word : keyWord){
+            List<Car> brand = repository.findCarsByBrandContainsIgnoreCase(word);
+            if (!brand.isEmpty()){
+                result.addAll(brand);
+            }
+
+            List<Car> model = repository.findCarsByModelContainsIgnoreCase(word);
+            if (!model.isEmpty()){
+                result.addAll(model);
+            }
+
+            List<Car> motor = repository.findCarsByMotorTypeContainsIgnoreCase(word);
+            if (!motor.isEmpty()){
+                result.addAll(model);
+            }
+
+            List<Car> color = repository.findCarsByColorContainsIgnoreCase(word);
+            if (!color.isEmpty()){
+                result.addAll(color);
+            }
+
+            List<Car> description = repository.findCarsByDescriptionContainsIgnoreCase(word);
+            if (!description.isEmpty()){
+                result.addAll(description);
+            }
+
+
+        }
+        return result.stream().distinct().toList();
     }
 }

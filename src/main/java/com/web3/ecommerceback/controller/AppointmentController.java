@@ -1,21 +1,20 @@
 package com.web3.ecommerceback.controller;
 
 import com.web3.ecommerceback.entities.Appointment;
-import com.web3.ecommerceback.repository.AppointementRepository;
-import com.web3.ecommerceback.service.AppointementService;
+import com.web3.ecommerceback.repository.AppointmentRepository;
+import com.web3.ecommerceback.service.AppointmentService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/rdv")
 @AllArgsConstructor
 public class AppointmentController {
-    private AppointementService service;
-    private AppointementRepository repository;
+    private AppointmentService service;
+    private AppointmentRepository repository;
 
     @PostMapping("/take")
     public String takeAppointement(@RequestBody Appointment appointement) {
@@ -28,28 +27,28 @@ public class AppointmentController {
     }
 
     @GetMapping("/byMail/{mail}")
-    public Optional<Appointment> getByMail(@PathVariable String mail) {
-       return repository.findAppointementsByEmail(mail);
+    public List<Appointment> getByMail(@PathVariable String mail) {
+       return repository.findAppointmentsByEmail(mail);
     }
 
     @GetMapping("/date/{date}")
-   public Optional<Appointment> byDate(@PathVariable Date date) {
-        return repository.findAppointementsByAppointmentDate(date);
+   public List<Appointment> byDate(@PathVariable Date date) {
+        return repository.findAppointmentsByAppointmentDate(date);
     }
 
     @GetMapping("/byDateBetween")
-    public Optional<Appointment> byDateBetween(@RequestParam Date date1, @RequestParam Date date2) {
-        return repository.findAppointementsByAppointmentDateBetween(date1, date2);
+    public List<Appointment> byDateBetween(@RequestParam Date date1, @RequestParam Date date2) {
+        return repository.findAppointmentsByAppointmentDateBetween(date1, date2);
     }
 
     @GetMapping("/byName/{name}")
-    public Optional<Appointment> byName(@PathVariable String name) {
-        return repository.findAppointementByFirstNameContainsIgnoreCase(name);
+    public List<Appointment> byName(@PathVariable String name) {
+        return repository.findAppointmentByFirstNameContainsIgnoreCase(name);
     }
 
     @GetMapping("/byStatus/{status}")
     public List<Appointment> getByStatus(@PathVariable String status) {
-        return repository.findAppointementsByStatus(status);
+        return repository.findAppointmentsByStatus(status);
     }
 
     @PutMapping("/validate/{id}")

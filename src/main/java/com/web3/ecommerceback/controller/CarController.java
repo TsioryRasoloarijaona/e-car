@@ -32,12 +32,12 @@ public class CarController {
     }
 
     @GetMapping("/byBrand/{brand}")
-    public Optional<Car> byBrand(@PathVariable String brand) {
+    public List<Car> byBrand(@PathVariable String brand) {
         return repository.findCarsByBrandContainsIgnoreCase(brand);
     }
 
     @GetMapping("/byModel/{model}")
-    public Optional<Car> findCarsByModel(@PathVariable String model){
+    public List<Car> findCarsByModel(@PathVariable String model){
         return repository.findCarsByModelContainsIgnoreCase(model);
     }
 
@@ -47,7 +47,7 @@ public class CarController {
     };
 
     @GetMapping("/byMotor/{motorType}")
-    public Optional<Car> findCarsByMotorTypeEquals(String motorType){
+    public List<Car> findCarsByMotorTypeEquals(String motorType){
         return repository.findCarsByMotorTypeContainsIgnoreCase(motorType);
     };
 
@@ -84,6 +84,11 @@ public class CarController {
     @PutMapping("/pin")
     public String updatePirce (@RequestParam double price , @RequestParam long id){
         return service.updatePrice(price,id);
+    }
+
+    @GetMapping("/research")
+    public List<Car> research (@RequestParam String input){
+        return service.research(input);
     }
 
 
