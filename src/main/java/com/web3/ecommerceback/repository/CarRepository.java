@@ -13,4 +13,5 @@ public interface CarRepository extends JpaRepository<Car,Long> {
     List<Car> findCarsByPriceBetween(double min , double max);
     List<Car> findCarsByMotorTypeEquals(String motorType);
     List<Car> findCarsByStatusEquals(boolean status);
+
 }

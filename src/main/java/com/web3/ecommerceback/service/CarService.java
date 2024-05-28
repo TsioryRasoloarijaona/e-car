@@ -4,8 +4,8 @@ import com.web3.ecommerceback.entities.Car;
 import com.web3.ecommerceback.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CarService {
@@ -25,5 +25,28 @@ public class CarService {
             return "failed";
         }
 
+    }
+
+    public List<String> brandList(){
+        List<Car> cars = repository.findAll();
+        return cars.stream().map(Car::getBrand).collect(Collectors.toList());
+    }
+
+    public List<String> modelList(){
+        List<Car> cars = repository.findAll();
+        return cars.stream().map(Car::getModel).collect(Collectors.toList());
+    }
+
+    public List<String> motorList(){
+        List<Car> cars = repository.findAll();
+        return cars.stream().map(Car::getMotorType).collect(Collectors.toList());
+    }
+
+    public List<Double> priceInterval(){
+        List<Car> cars = repository.findAll();
+        double max = cars.stream().map(Car::getPrice).max(Double::compareTo).get();
+        double min = cars.stream().map(Car::getPrice).min(Double::compareTo).get();
+
+        return List.of(min , max);
     }
 }

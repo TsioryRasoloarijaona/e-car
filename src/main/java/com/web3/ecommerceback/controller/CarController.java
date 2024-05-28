@@ -50,5 +50,27 @@ public class CarController {
         return repository.findCarsByStatusEquals(true);
     };
 
+    @GetMapping("/brandList")
+    public List<String> brandList(){
+        return service.brandList();
+    }
+
+    @GetMapping("/motorList")
+    public List<String> motorList(){
+        return service.motorList();
+    }
+
+    @GetMapping("/modelList")
+    public List<String> modelList(){
+        return service.modelList();
+    }
+
+    @GetMapping("/intervalPrice")
+    public List<Double> intervalPrice(){
+        return service.priceInterval();
+    }
+
+
+
 
 }
