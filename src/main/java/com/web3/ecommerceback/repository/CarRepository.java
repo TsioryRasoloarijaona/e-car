@@ -14,15 +14,21 @@ import java.util.Optional;
 @Repository
 public interface CarRepository extends JpaRepository<Car,Long> {
 
-    Optional<Car> findCarsByBrandContainsIgnoreCase(String brand);
+    List<Car> findCarsByBrandContainsIgnoreCase(String brand);
 
-    Optional<Car> findCarsByModelContainsIgnoreCase( String model);
+    List<Car> findCarsByModelContainsIgnoreCase( String model);
 
     List<Car> findCarsByPriceBetween(double min , double max);
 
-    Optional<Car> findCarsByMotorTypeContainsIgnoreCase(String motorType);
+    List<Car> findCarsByMotorTypeContainsIgnoreCase(String motorType);
 
     List<Car> findCarsByStatusEquals(boolean status);
+
+    List<Car> findCarsByColorContainsIgnoreCase(String color);
+
+    List<Car> findCarsByDescriptionContainsIgnoreCase(String description);
+
+    List<Car> findCarsByPlaceNumberEquals(int placeNumber);
 
     @Modifying
     @Transactional

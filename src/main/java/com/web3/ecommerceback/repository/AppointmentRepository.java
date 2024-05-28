@@ -11,19 +11,18 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
-public interface AppointementRepository extends JpaRepository<Appointment, Long> {
-    Optional<Appointment> findAppointementsByEmail(String email);
+public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
+    List<Appointment> findAppointmentsByEmail(String email);
 
-    Optional<Appointment> findAppointementsByAppointmentDate(Date appointmentDate);
+    List<Appointment> findAppointmentsByAppointmentDate(Date appointmentDate);
 
-    Optional<Appointment> findAppointementsByAppointmentDateBetween(Date startDate, Date endDate);
+    List<Appointment> findAppointmentsByAppointmentDateBetween(Date startDate, Date endDate);
 
-    Optional<Appointment> findAppointementByFirstNameContainsIgnoreCase(String name);
+    List<Appointment> findAppointmentByFirstNameContainsIgnoreCase(String name);
 
-    List<Appointment> findAppointementsByStatus(String status);
+    List<Appointment> findAppointmentsByStatus(String status);
 
     @Transactional
     @Modifying

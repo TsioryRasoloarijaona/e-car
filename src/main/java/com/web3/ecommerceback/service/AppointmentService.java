@@ -1,7 +1,7 @@
 package com.web3.ecommerceback.service;
 
 import com.web3.ecommerceback.entities.Appointment;
-import com.web3.ecommerceback.repository.AppointementRepository;
+import com.web3.ecommerceback.repository.AppointmentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,8 +10,8 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class AppointementService {
-    private AppointementRepository repository;
+public class AppointmentService {
+    private AppointmentRepository repository;
     private MailSender mailSender;
 
     public String appointement(Appointment appointement) {
