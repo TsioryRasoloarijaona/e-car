@@ -15,14 +15,7 @@ import java.time.Instant;
 @Entity
 @Table(name = "Appointement")
 public class Appointement {
-    /*● CarId
-● Name
-● FirstName
-● Email
-● Message
-● Contact
-● AppointmentDate
-● Status (pending, validated, rejected, archived)*/
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
