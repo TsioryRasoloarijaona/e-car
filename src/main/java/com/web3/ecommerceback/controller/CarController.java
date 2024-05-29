@@ -3,6 +3,7 @@ package com.web3.ecommerceback.controller;
 import com.web3.ecommerceback.entities.Car;
 import com.web3.ecommerceback.repository.CarRepository;
 import com.web3.ecommerceback.service.CarService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,10 +12,9 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/car")
+@AllArgsConstructor
 public class CarController {
-    @Autowired
     private CarRepository repository;
-    @Autowired
     private CarService service;
 
     @PostMapping("/save")
@@ -81,7 +81,7 @@ public class CarController {
         return service.pin(id);
     }
 
-    @PutMapping("/pin")
+    @PutMapping("/priceUpdate")
     public String updatePirce (@RequestParam double price , @RequestParam long id){
         return service.updatePrice(price,id);
     }
