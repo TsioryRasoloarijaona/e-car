@@ -17,6 +17,11 @@ public class CarController {
     private CarRepository repository;
     private CarService service;
 
+    @GetMapping("/ping")
+    public String ping() {
+        return "pong";
+    }
+
     @PostMapping("/save")
     public String save (@RequestBody Car car) {
      return service.save(car);
