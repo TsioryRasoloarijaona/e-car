@@ -14,15 +14,16 @@ public class AppointmentService {
     private AppointmentRepository repository;
     private MailSender mailSender;
 
-    public String appointement(Appointment appointement) {
+    public String appointment(Appointment appointment) {
         try {
-            String subject = "Appointment request - " + appointement.getAppointmentDate() + " " + appointement.getEmail();
-            String body = appointement.getMessage();
+            String subject = "Appointment request - " + appointment.getAppointmentDate() + " " + appointment.getEmail();
+            String body = appointment.getMessage();
             boolean sent = mailSender.sendMail(System.getenv("ADMIN_MAIL"), subject, body);
             if (sent) {
-                repository.save(appointement);
+                repository.save(appointment);
+                return "your request has been sent";
             }
-            return "your request has been sent";
+            return "invalid email";
         } catch (Exception e) {
             e.printStackTrace();
             return "failed to appointment";

@@ -4,9 +4,8 @@ import com.web3.ecommerceback.entities.Car;
 import com.web3.ecommerceback.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,19 +28,46 @@ public class CarService {
 
     }
 
+    public String saveMany(List<Car> cars) {
+            for (Car car : cars){
+                save(car);
+            }
+            return "cars saved";
+    }
+
     public List<String> brandList(){
         List<Car> cars = repository.findAll();
-        return cars.stream().map(Car::getBrand).collect(Collectors.toList());
+        Set<String> uniqueBrands = new HashSet<>();
+        cars.stream().map(Car::getBrand).forEach(uniqueBrands::add);
+        return new ArrayList<>(uniqueBrands);
     }
 
     public List<String> modelList(){
         List<Car> cars = repository.findAll();
-        return cars.stream().map(Car::getModel).collect(Collectors.toList());
+        Set<String> uniqueModel = new HashSet<>();
+         cars.stream().map(Car::getModel).forEach(uniqueModel::add);
+         return new ArrayList<>(uniqueModel);
     }
 
     public List<String> motorList(){
         List<Car> cars = repository.findAll();
-        return cars.stream().map(Car::getMotorType).collect(Collectors.toList());
+        Set<String> uniqueMotors = new HashSet<>();
+        cars.stream().map(Car::getMotorType).forEach(uniqueMotors::add);
+        return new ArrayList<>(uniqueMotors);
+    }
+
+    public List<String> colorList(){
+        List<Car> cars = repository.findAll();
+        Set<String> uniqueColors = new HashSet<>();
+        cars.stream().map(Car::getColor).forEach(uniqueColors::add);
+        return new ArrayList<>(uniqueColors);
+    }
+
+    public List<String> nameList(){
+        List<Car> cars = repository.findAll();
+        Set<String> uniqueNames = new HashSet<>();
+        cars.stream().map(Car::getName).forEach(uniqueNames::add);
+        return new ArrayList<>(uniqueNames);
     }
 
     public List<Double> priceInterval(){

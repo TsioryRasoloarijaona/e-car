@@ -4,7 +4,6 @@ import com.web3.ecommerceback.entities.Car;
 import com.web3.ecommerceback.repository.CarRepository;
 import com.web3.ecommerceback.service.CarService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,6 +25,12 @@ public class CarController {
     public String save (@RequestBody Car car) {
      return service.save(car);
     }
+
+    @PostMapping("/save/many")
+    public String saveMany (@RequestBody List<Car> cars) {
+        return service.saveMany(cars);
+    }
+
     @GetMapping("/allCar")
     public List<Car> allCar() {
         return service.findAll();
@@ -66,6 +71,16 @@ public class CarController {
         return service.brandList();
     }
 
+    @GetMapping("/colorList")
+    public List<String> colorList(){
+        return service.colorList();
+    }
+
+    @GetMapping("/nameList")
+    public List<String> nameList(){
+        return service.nameList();
+    }
+
     @GetMapping("/motorList")
     public List<String> motorList(){
         return service.motorList();
@@ -87,7 +102,7 @@ public class CarController {
     }
 
     @PutMapping("/priceUpdate")
-    public String updatePirce (@RequestParam double price , @RequestParam long id){
+    public String updatePrice (@RequestParam double price , @RequestParam long id){
         return service.updatePrice(price,id);
     }
 

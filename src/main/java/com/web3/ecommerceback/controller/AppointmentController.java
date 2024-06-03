@@ -18,7 +18,7 @@ public class AppointmentController {
 
     @PostMapping("/take")
     public String takeAppointement(@RequestBody Appointment appointement) {
-        return service.appointement(appointement);
+        return service.appointment(appointement);
     }
 
     @GetMapping("/allRdv")
