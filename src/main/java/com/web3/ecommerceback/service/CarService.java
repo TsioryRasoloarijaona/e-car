@@ -70,6 +70,13 @@ public class CarService {
         return new ArrayList<>(uniqueNames);
     }
 
+    public List<String> typeList(){
+        List<Car> cars = repository.findAll();
+        Set<String> uniqueTypes = new HashSet<>();
+        cars.stream().map(Car::getType).forEach(uniqueTypes::add);
+        return new ArrayList<>(uniqueTypes);
+    }
+
     public List<Double> priceInterval(){
         List<Car> cars = repository.findAll();
         double max = cars.stream().map(Car::getPrice).max(Double::compareTo).get();
@@ -108,6 +115,8 @@ public class CarService {
 
         List<Car> result = new ArrayList<>();
 
+
+
         for (String word : keyWord){
 
             List<Car> brand = repository.findCarsByBrandContainsIgnoreCase(word);
@@ -133,6 +142,11 @@ public class CarService {
             List<Car> description = repository.findCarsByDescriptionContainsIgnoreCase(word);
             if (!description.isEmpty()){
                 result.addAll(description);
+            }
+
+            List<Car> name = repository.findCarsByNameContainsIgnoreCase(word);
+            if (!description.isEmpty()){
+                result.addAll(name);
             }
         }
         return result.stream().distinct().toList();

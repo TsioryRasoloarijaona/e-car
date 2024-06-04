@@ -46,6 +46,11 @@ public class CarController {
         return repository.findCarsByBrandContainsIgnoreCase(brand);
     }
 
+    @GetMapping("/byName/{name}")
+    public List<Car> byName(@PathVariable String name) {
+        return repository.findCarsByNameContainsIgnoreCase(name);
+    }
+
     @GetMapping("/byModel/{model}")
     public List<Car> findCarsByModel(@PathVariable String model){
         return repository.findCarsByModelContainsIgnoreCase(model);
@@ -60,6 +65,11 @@ public class CarController {
     public List<Car> findCarsByMotorTypeEquals(String motorType){
         return repository.findCarsByMotorTypeContainsIgnoreCase(motorType);
     };
+
+    @GetMapping("/motor/type/price")
+    public List<Car> filter(@RequestParam String type,@RequestParam String motorType,@RequestParam double priceMin, double priceMax){
+        return repository.findCarsByTypeAndMotorTypeIgnoreCaseAndPriceBetween(type,motorType,priceMin,priceMax);
+    }
 
     @GetMapping("/pined")
     public List<Car> findCarsByStatusEquals(){
@@ -89,6 +99,11 @@ public class CarController {
     @GetMapping("/modelList")
     public List<String> modelList(){
         return service.modelList();
+    }
+
+    @GetMapping("/typeList")
+    public List<String> typeList(){
+        return service.typeList();
     }
 
     @GetMapping("/intervalPrice")

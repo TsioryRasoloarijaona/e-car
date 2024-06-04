@@ -28,7 +28,9 @@ public interface CarRepository extends JpaRepository<Car,Long> {
 
     List<Car> findCarsByDescriptionContainsIgnoreCase(String description);
 
-    List<Car> findCarsByPlaceNumberEquals(int placeNumber);
+    List<Car> findCarsByNameContainsIgnoreCase(String name);
+
+    List<Car> findCarsByTypeAndMotorTypeIgnoreCaseAndPriceBetween( String type, String motorType, double priceMin, double priceMax);
 
     @Modifying
     @Transactional
