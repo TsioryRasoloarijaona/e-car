@@ -62,7 +62,7 @@ public class CarController {
     };
 
     @GetMapping("/byMotor/{motorType}")
-    public List<Car> findCarsByMotorTypeEquals(String motorType){
+    public List<Car> findCarsByMotorType(@PathVariable String motorType){
         return repository.findCarsByMotorTypeContainsIgnoreCase(motorType);
     };
 
@@ -107,8 +107,8 @@ public class CarController {
     }
 
     @GetMapping("/intervalPrice")
-    public List<Double> intervalPrice(){
-        return service.priceInterval();
+    public List<Double[]> intervalPrice(){
+        return service.intervals();
     }
 
     @PutMapping("/pin/{id}")

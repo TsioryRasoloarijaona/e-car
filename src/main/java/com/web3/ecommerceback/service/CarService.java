@@ -77,12 +77,32 @@ public class CarService {
         return new ArrayList<>(uniqueTypes);
     }
 
-    public List<Double> priceInterval(){
+    private List<Double> priceInterval(){
         List<Car> cars = repository.findAll();
         double max = cars.stream().map(Car::getPrice).max(Double::compareTo).get();
         double min = cars.stream().map(Car::getPrice).min(Double::compareTo).get();
 
         return List.of(min , max);
+    }
+
+
+    private List<Double[]> generateIntervals(double min, double max) {
+        List<Double[]> intervals = new ArrayList<>();
+
+        double range = max - min;
+        double intervalSize = range / 6;
+
+        for (int i = 0; i < 6; i++) {
+            double start = min + i * intervalSize;
+            double end = (i == 6 - 1) ? max : start + intervalSize;
+            intervals.add(new Double[]{start, end});
+        }
+
+        return intervals;
+    }
+
+    public List<Double[]> intervals (){
+        return generateIntervals(priceInterval().get(0),priceInterval().get(1));
     }
 
     public String pin(long id){
@@ -131,7 +151,7 @@ public class CarService {
 
             List<Car> motor = repository.findCarsByMotorTypeContainsIgnoreCase(word);
             if (!motor.isEmpty()){
-                result.addAll(model);
+                result.addAll(motor);
             }
 
             List<Car> color = repository.findCarsByColorContainsIgnoreCase(word);
