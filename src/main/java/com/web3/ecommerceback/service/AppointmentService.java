@@ -1,6 +1,7 @@
 package com.web3.ecommerceback.service;
 
 import com.web3.ecommerceback.entities.Appointment;
+import com.web3.ecommerceback.entities.Message;
 import com.web3.ecommerceback.repository.AppointmentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,23 +15,23 @@ public class AppointmentService {
     private AppointmentRepository repository;
     private MailSender mailSender;
 
-    public String appointment(Appointment appointment) {
+    public Message appointment(Appointment appointment) {
         try {
             String subject = "Appointment request - " + appointment.getAppointmentDate() + " " + appointment.getEmail();
             String body = appointment.getMessage();
             boolean sent = mailSender.sendMail(System.getenv("ADMIN_MAIL"), subject, body);
             if (sent) {
                 repository.save(appointment);
-                return "your request has been sent";
+                return new Message("your request has been sent",null);
             }
-            return "invalid email";
+            return new Message(null, "invalid email");
         } catch (Exception e) {
             e.printStackTrace();
-            return "failed to appointment";
+            return new Message(null,"failed to appointment");
         }
     }
 
-    public String validateAppointment(long id) {
+    public Message validateAppointment(long id) {
         try {
             Optional<Appointment> appointment = repository.findById(id);
             if (appointment.isPresent() &&
@@ -43,19 +44,19 @@ public class AppointmentService {
                 boolean mail = mailSender.sendMail(appointment.get().getEmail(), subject, body);
                 if (mail) {
                     repository.updateStatus("validated", id);
-                    return "appointment validated";
+                    return new Message("appointment validated",null);
                 }
 
             }
 
-            return "failed to validate appointment";
+            return new Message(null,    "failed to validate appointment");
         } catch (Exception e) {
             e.printStackTrace();
-            return "failed to validate appointment";
+            return new Message(null,    "failed to validate appointment");
         }
     }
 
-    public String rejectAppointment(long id) {
+    public Message rejectAppointment(long id) {
         try {
             Optional<Appointment> appointment = repository.findById(id);
             if (appointment.isPresent()) {
@@ -64,24 +65,24 @@ public class AppointmentService {
                 boolean mail = mailSender.sendMail(appointment.get().getEmail(), subject, body);
                 if (mail) {
                     repository.updateStatus("rejected", id);
-                    return "appointment rejected";
+                    return new Message("appointment rejected",null);
                 }
 
             }
-            return "failed to reject appointment";
+            return new Message(null,"failed to reject appointment");
         } catch (Exception e) {
             e.printStackTrace();
-            return "failed to reject appointment";
+            return  new Message(null,"failed to reject appointment");
         }
     }
 
-    public String archiveAppointment(long id) {
+    public Message archiveAppointment(long id) {
         try {
             repository.updateStatus("archived", id);
-            return "appointment archived";
+            return new Message("archived",null);
         } catch (Exception e) {
             e.printStackTrace();
-            return "failed to archive appointment";
+            return new Message(null,"failed to archive appointment");
         }
     }
 }

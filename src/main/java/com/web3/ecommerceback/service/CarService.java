@@ -1,7 +1,9 @@
 package com.web3.ecommerceback.service;
 
 import com.web3.ecommerceback.entities.Car;
+import com.web3.ecommerceback.entities.Message;
 import com.web3.ecommerceback.repository.CarRepository;
+import org.aspectj.bridge.IMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +19,13 @@ public class CarService {
         return repository.findAll();
     }
 
-    public String save(Car car) {
+    public Message save(Car car) {
         try {
             repository.save(car);
-            return "car saved";
+            return new Message( "car saved",null);
         }catch (Exception e){
             e.printStackTrace();
-            return "failed";
+            return new Message(null,"failed to save car");
         }
 
     }
@@ -105,25 +107,25 @@ public class CarService {
         return generateIntervals(priceInterval().get(0),priceInterval().get(1));
     }
 
-    public String pin(long id){
+    public Message pin(long id){
         try {
             repository.updateCarById(id);
-            return "updated successfully";
+            return new Message("pinned successfully",null);
         }
         catch (Exception e){
             e.printStackTrace();
-            return "failed to update";
+            return new Message(null,"failed to update");
         }
     }
 
-    public String updatePrice(double price ,long id){
+    public Message updatePrice(double price , long id){
         try {
             repository.updateCarPriceById(price,id);
-            return "updated successfully";
+            return new Message("updated successfully",null);
         }
         catch (Exception e){
             e.printStackTrace();
-            return "failed to update";
+            return new Message(null,"failed to update");
         }
 
     }
