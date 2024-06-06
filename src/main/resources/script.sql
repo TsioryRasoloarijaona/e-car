@@ -14,3 +14,5 @@ delete from car_images where car_id = 405;
 delete from car where id = 405
 
 alter table appointement alter column status set default 'pending';
+
+select count(*) , car_id from appointement group by car_id;
