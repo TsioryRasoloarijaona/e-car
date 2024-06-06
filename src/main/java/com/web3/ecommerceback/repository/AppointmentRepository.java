@@ -28,7 +28,10 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     Long countAppointmentsByMonth(@Param("month") int month);
 
     @Query("select count(a) as total, a.car.name from Appointment a group by a.car order by total desc limit 1")
-    Object findFavorite();
+    Object findFavoriteCar();
+
+    @Query("select count(a) as total, a.car.brand from Appointment a group by a.car order by total desc limit 1")
+    Object findFavoriteBrand();
 
     @Transactional
     @Modifying
