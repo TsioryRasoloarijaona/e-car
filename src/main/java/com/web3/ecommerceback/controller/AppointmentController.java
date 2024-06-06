@@ -72,6 +72,11 @@ public class AppointmentController {
         return service.countAppointmentsByMonth();
     }
 
+    @GetMapping("/favorite")
+    public Object favorite(){
+        return repository.findFavorite();
+    }
+
 
 
 }
