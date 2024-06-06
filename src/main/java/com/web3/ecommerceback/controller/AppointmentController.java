@@ -87,6 +87,11 @@ public class AppointmentController {
         return repository.appointmentCountByCar(month);
     }
 
+    @GetMapping("/count/byStatus/{status}")
+    public int getCountByStatus(@PathVariable String status) {
+        return repository.countAppointmentsByStatus(status);
+    }
+
 
 
 }
