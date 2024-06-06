@@ -1,6 +1,7 @@
 package com.web3.ecommerceback.controller;
 
 import com.web3.ecommerceback.entities.Car;
+import com.web3.ecommerceback.entities.Message;
 import com.web3.ecommerceback.repository.CarRepository;
 import com.web3.ecommerceback.service.CarService;
 import lombok.AllArgsConstructor;
@@ -22,7 +23,7 @@ public class CarController {
     }
 
     @PostMapping("/save")
-    public String save (@RequestBody Car car) {
+    public Message save (@RequestBody Car car) {
      return service.save(car);
     }
 
@@ -62,7 +63,7 @@ public class CarController {
     };
 
     @GetMapping("/byMotor/{motorType}")
-    public List<Car> findCarsByMotorTypeEquals(String motorType){
+    public List<Car> findCarsByMotorType(@PathVariable String motorType){
         return repository.findCarsByMotorTypeContainsIgnoreCase(motorType);
     };
 
@@ -107,17 +108,17 @@ public class CarController {
     }
 
     @GetMapping("/intervalPrice")
-    public List<Double> intervalPrice(){
-        return service.priceInterval();
+    public List<Double[]> intervalPrice(){
+        return service.intervals();
     }
 
     @PutMapping("/pin/{id}")
-    public String pin (@PathVariable long id){
+    public Message pin (@PathVariable long id){
         return service.pin(id);
     }
 
     @PutMapping("/priceUpdate")
-    public String updatePrice (@RequestParam double price , @RequestParam long id){
+    public Message updatePrice (@RequestParam double price , @RequestParam long id){
         return service.updatePrice(price,id);
     }
 

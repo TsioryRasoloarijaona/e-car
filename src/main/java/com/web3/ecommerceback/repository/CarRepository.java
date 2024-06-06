@@ -9,7 +9,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface CarRepository extends JpaRepository<Car,Long> {
@@ -31,6 +30,9 @@ public interface CarRepository extends JpaRepository<Car,Long> {
     List<Car> findCarsByNameContainsIgnoreCase(String name);
 
     List<Car> findCarsByTypeAndMotorTypeIgnoreCaseAndPriceBetween( String type, String motorType, double priceMin, double priceMax);
+
+
+
 
     @Modifying
     @Transactional

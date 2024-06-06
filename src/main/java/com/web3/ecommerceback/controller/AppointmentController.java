@@ -1,6 +1,7 @@
 package com.web3.ecommerceback.controller;
 
 import com.web3.ecommerceback.entities.Appointment;
+import com.web3.ecommerceback.entities.Message;
 import com.web3.ecommerceback.repository.AppointmentRepository;
 import com.web3.ecommerceback.service.AppointmentService;
 import lombok.AllArgsConstructor;
@@ -17,7 +18,7 @@ public class AppointmentController {
     private AppointmentRepository repository;
 
     @PostMapping("/take")
-    public String takeAppointement(@RequestBody Appointment appointement) {
+    public Message takeAppointement(@RequestBody Appointment appointement) {
         return service.appointment(appointement);
     }
 
@@ -52,18 +53,28 @@ public class AppointmentController {
     }
 
     @PutMapping("/validate/{id}")
-    public String validateAppointment(@PathVariable long id) {
+    public Message validateAppointment(@PathVariable long id) {
         return service.validateAppointment(id);
     }
 
     @PutMapping("/reject/{id}")
-    public String rejectAppointment(@PathVariable long id) {
+    public Message rejectAppointment(@PathVariable long id) {
         return service.rejectAppointment(id);
     }
 
     @PutMapping("/archive/{id}")
-    public String archiveAppointment(@PathVariable long id) {
+    public Message archiveAppointment(@PathVariable long id) {
         return service.archiveAppointment(id);
+    }
+
+    @GetMapping("/total/thisMonth")
+    public Long totalThisMonth() {
+        return service.countAppointmentsByMonth();
+    }
+
+    @GetMapping("/favorite")
+    public Object favorite(){
+        return repository.findFavorite();
     }
 
 
