@@ -31,6 +31,9 @@ public interface CarRepository extends JpaRepository<Car,Long> {
 
     List<Car> findCarsByTypeAndMotorTypeIgnoreCaseAndPriceBetween( String type, String motorType, double priceMin, double priceMax);
 
+
+
+
     @Modifying
     @Transactional
     @Query("update Car c set c.status = true where c.id = :id")

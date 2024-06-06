@@ -19,8 +19,10 @@ public class AppointmentService {
         try {
             String subject = "Appointment request - " + appointment.getAppointmentDate() + " " + appointment.getEmail();
             String body = appointment.getMessage();
-            boolean sent = mailSender.sendMail(System.getenv("ADMIN_MAIL"), subject, body);
-            if (sent) {
+            boolean sentToAdmin = mailSender.sendMail(System.getenv("ADMIN_MAIL"), subject, body);
+
+            if (sentToAdmin) {
+                appointment.setStatus("pending");
                 repository.save(appointment);
                 return new Message("your request has been sent",null);
             }
@@ -84,5 +86,11 @@ public class AppointmentService {
             e.printStackTrace();
             return new Message(null,"failed to archive appointment");
         }
+    }
+
+    public Long countAppointmentsByMonth() {
+        LocalDate date = LocalDate.now();
+        int month = date.getMonthValue();
+        return repository.countAppointmentsByMonth(month);
     }
 }

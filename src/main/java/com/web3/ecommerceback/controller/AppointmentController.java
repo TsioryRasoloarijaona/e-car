@@ -67,6 +67,11 @@ public class AppointmentController {
         return service.archiveAppointment(id);
     }
 
+    @GetMapping("/total/thisMonth")
+    public Long totalThisMonth() {
+        return service.countAppointmentsByMonth();
+    }
+
 
 
 }

@@ -12,3 +12,5 @@ where car_id = 353;
 delete from car_images where car_id = 405;
 
 delete from car where id = 405
+
+alter table appointement alter column status set default 'pending';
