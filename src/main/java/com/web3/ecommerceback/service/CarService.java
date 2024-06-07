@@ -3,12 +3,11 @@ package com.web3.ecommerceback.service;
 import com.web3.ecommerceback.entities.Car;
 import com.web3.ecommerceback.entities.Message;
 import com.web3.ecommerceback.repository.CarRepository;
-import org.aspectj.bridge.IMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
+
 
 @Service
 public class CarService {
@@ -107,9 +106,20 @@ public class CarService {
         return generateIntervals(priceInterval().get(0),priceInterval().get(1));
     }
 
-    public Message pin(long id){
+    public Message statusFalse(long id){
         try {
-            repository.updateCarById(id);
+            repository.updateCarById(id , false);
+            return new Message("pinned successfully",null);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return new Message(null,"failed to update");
+        }
+    }
+
+    public Message unPin(long id){
+        try {
+            repository.updateCarById(id , false);
             return new Message("pinned successfully",null);
         }
         catch (Exception e){

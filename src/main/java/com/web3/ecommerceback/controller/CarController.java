@@ -112,10 +112,17 @@ public class CarController {
         return service.intervals();
     }
 
-    @PutMapping("/pin/{id}")
+    @PutMapping("/statusFalse/{id}")
     public Message pin (@PathVariable long id){
-        return service.pin(id);
+        return service.statusFalse(id);
     }
+
+    @PutMapping("/unPin/{id}")
+    public Message unPin (@PathVariable long id){
+        return service.unPin(id);
+    }
+
+
 
     @PutMapping("/priceUpdate")
     public Message updatePrice (@RequestParam double price , @RequestParam long id){
@@ -125,6 +132,11 @@ public class CarController {
     @GetMapping("/research")
     public List<Car> research (@RequestParam String input){
         return service.research(input);
+    }
+
+    @GetMapping("/latest")
+    public List<Car> latest(){
+        return repository.findCarsOrderByIdDesc();
     }
 
 
