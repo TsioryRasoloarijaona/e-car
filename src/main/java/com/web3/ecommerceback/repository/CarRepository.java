@@ -31,13 +31,14 @@ public interface CarRepository extends JpaRepository<Car,Long> {
 
     List<Car> findCarsByTypeAndMotorTypeIgnoreCaseAndPriceBetween( String type, String motorType, double priceMin, double priceMax);
 
-
+    @Query("select a from Car a where a.status = true order by a.id desc limit 6")
+    List<Car> findCarsOrderByIdDesc();
 
 
     @Modifying
     @Transactional
-    @Query("update Car c set c.status = true where c.id = :id")
-    void updateCarById(@Param(value = "id") long id);
+    @Query("update Car c set c.status = :status where c.id = :id")
+    void updateCarById(@Param(value = "id") long id , @Param(value = "status") boolean status);
 
     @Modifying
     @Transactional
