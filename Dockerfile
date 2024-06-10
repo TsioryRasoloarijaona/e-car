@@ -5,4 +5,4 @@ RUN mvn clean package -DskipTests
 FROM openjdk:21-jdk-slim
 COPY --from=build /target/e-car-0.0.1-SNAPSHOT.jar e-car.jar
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","e-commerce-back.jar"]
+ENTRYPOINT ["java","-jar","e-car.jar"]
