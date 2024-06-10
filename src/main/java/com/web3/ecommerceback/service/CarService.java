@@ -20,6 +20,7 @@ public class CarService {
 
     public Message save(Car car) {
         try {
+            car.setStatus(true);
             repository.save(car);
             return new Message( "car saved",null);
         }catch (Exception e){

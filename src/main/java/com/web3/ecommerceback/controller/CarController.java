@@ -3,10 +3,14 @@ package com.web3.ecommerceback.controller;
 import com.web3.ecommerceback.entities.Car;
 import com.web3.ecommerceback.entities.Message;
 import com.web3.ecommerceback.repository.CarRepository;
+import com.web3.ecommerceback.repository.PageCar;
 import com.web3.ecommerceback.service.CarService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +20,7 @@ import java.util.Optional;
 public class CarController {
     private CarRepository repository;
     private CarService service;
+    private PageCar pageCar;
 
     @GetMapping("/ping")
     public String ping() {
@@ -28,8 +33,8 @@ public class CarController {
     }
 
     @PostMapping("/save/many")
-    public String saveMany (@RequestBody List<Car> cars) {
-        return service.saveMany(cars);
+    public List<Car> saveMany (@RequestBody List<Car> cars) {
+        return repository.saveAll(cars);
     }
 
     @GetMapping("/allCar")
@@ -139,7 +144,10 @@ public class CarController {
         return repository.findCarsOrderByIdDesc();
     }
 
-
-
+    @GetMapping("/page")
+    public int carPageable(@RequestParam int page,@RequestParam int size){
+        PageRequest pr = PageRequest.of(page,size);
+        return pageCar.findAll(pr).getTotalPages();
+    }
 
 }
