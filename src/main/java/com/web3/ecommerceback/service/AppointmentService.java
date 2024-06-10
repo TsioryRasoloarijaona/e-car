@@ -101,4 +101,9 @@ public class AppointmentService {
         int month = date.getMonthValue();
         return repository.countAppointmentsByMonth(month);
     }
+
+    public Message sendToAdmin(String message) {
+        mailSender.sendMail(System.getenv("ADMIN_MAIL"),"request from customer", message);
+        return new Message("message sent" , null);
+    }
 }

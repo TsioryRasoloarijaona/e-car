@@ -144,10 +144,16 @@ public class CarController {
         return repository.findCarsOrderByIdDesc();
     }
 
-    @GetMapping("/page")
-    public int carPageable(@RequestParam int page,@RequestParam int size){
-        PageRequest pr = PageRequest.of(page,size);
+    @GetMapping("/totalPage")
+    public int carPageable(){
+        PageRequest pr = PageRequest.of(1,6);
         return pageCar.findAll(pr).getTotalPages();
+    }
+
+    @GetMapping("/page/{page}")
+    public List<Car> carPageable(@PathVariable int page){
+        PageRequest pr = PageRequest.of(page,6);
+        return pageCar.findAll(pr).getContent();
     }
 
 }

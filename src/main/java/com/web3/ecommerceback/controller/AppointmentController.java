@@ -14,6 +14,7 @@ import java.util.List;
 @RequestMapping("/rdv")
 @AllArgsConstructor
 public class AppointmentController {
+    private final AppointmentService appointmentService;
     private AppointmentService service;
     private AppointmentRepository repository;
 
@@ -92,6 +93,9 @@ public class AppointmentController {
         return repository.countAppointmentsByStatus(status);
     }
 
-
+    @PostMapping("/message")
+    public Message addMessage(@RequestBody String message) {
+        return appointmentService.sendToAdmin(message);
+    }
 
 }
