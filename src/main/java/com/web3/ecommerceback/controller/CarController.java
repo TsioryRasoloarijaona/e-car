@@ -133,7 +133,7 @@ public class CarController {
     public Message updatePrice (@RequestParam double price , @RequestParam long id){
         return service.updatePrice(price,id);
     }
-
+    
     @GetMapping("/research")
     public List<Car> research (@RequestParam String input){
         return service.research(input);
