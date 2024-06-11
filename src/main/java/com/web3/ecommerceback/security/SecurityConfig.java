@@ -87,7 +87,7 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:3000","http://localhost:5173"));
+        configuration.setAllowedOrigins(List.of("http://localhost:3000","http://localhost:5173","https://e-commerce-4i9m5fv9e-tsioryrasoloarijaonas-projects.vercel.app"));
         configuration.setAllowedMethods(List.of("GET","POST","PUT","DELETE"));
         configuration.addAllowedHeader("*");
         configuration.addExposedHeader("X-Total-Count");
