@@ -34,6 +34,9 @@ public interface CarRepository extends JpaRepository<Car,Long> {
     @Query("select a from Car a where a.status = true order by a.id desc limit 6")
     List<Car> findCarsOrderByIdDesc();
 
+    @Query("select a from Car a where a.status = true order by a.id asc limit 4")
+    List<Car> findCarsShow();
+
 
     @Modifying
     @Transactional

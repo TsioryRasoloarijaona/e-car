@@ -156,4 +156,9 @@ public class CarController {
         return pageCar.findAll(pr).getContent();
     }
 
+    @GetMapping("/show")
+    public List<Car> carShow (){
+        return repository.findCarsShow();
+    }
+
 }
