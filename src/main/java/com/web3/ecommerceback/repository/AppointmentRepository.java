@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 
+import java.security.PublicKey;
 import java.sql.Date;
 import java.util.List;
 
@@ -25,6 +26,9 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     List<Appointment> findAppointmentsByStatus(String status);
 
     int countAppointmentsByStatus(String status);
+
+    @Query("select a from Appointment a order by a.appointmentDate desc ")
+    List<Appointment> ordered ();
 
     @Query("select count(a) from Appointment a where MONTH(a.appointmentDate) = :month")
     Long countAppointmentsByMonth(@Param("month") int month);
