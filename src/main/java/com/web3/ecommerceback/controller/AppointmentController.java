@@ -25,7 +25,7 @@ public class AppointmentController {
 
     @GetMapping("/allRdv")
     public List<Appointment> getAllRdv() {
-        return repository.findAll();
+        return repository.ordered();
     }
 
     @GetMapping("/byMail/{mail}")
